@@ -1,15 +1,28 @@
 public class NotificacaoTest {
-    public static void main ( String [] args) {
 
-        FabricaNotificacoes fabrica = new FabricaNotificacoes();
+    public static void main(String[] args) {
 
-        Notificacao notificacao = fabrica.criarNotificacao("EMAIL");
+        // Criamos uma fábrica de e-mail
+        CriadorNotificacao fabrica = new FabricaEmail();
+
+        // A fábrica cria o objeto de notificação
+        Notificacao notificacao = fabrica.criarNotificacao();
+
+        // Enviamos a mensagem
         notificacao.enviar("Seu pedido foi aprovado!");
 
-        notificacao = fabrica.criarNotificacao("WHATSAPP");
+        // Agora utilizamos a fábrica de SMS
+        fabrica = new FabricaSMS();
+
+        notificacao = fabrica.criarNotificacao();
+
         notificacao.enviar("Seu pedido foi aprovado!");
 
-        notificacao = fabrica.criarNotificacao("SMS");
+        // Por último, utilizamos a fábrica de WhatsApp
+        fabrica = new FabricaWhatsapp();
+
+        notificacao = fabrica.criarNotificacao();
+
         notificacao.enviar("Seu pedido foi aprovado!");
     }
 }
